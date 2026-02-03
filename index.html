@@ -111,6 +111,25 @@
             }
         }
     </style>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1458757641929030');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1458757641929030&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
 <body class="bg-gray-100 text-gray-800 antialiased pb-24 md:pb-0">
@@ -170,13 +189,17 @@
             </div>
         );
 
-        const VoiceCard = ({ initial, title, content, stars = 5 }) => (
+        const VoiceCard = ({ name, attribute, title, content, stars = 5 }) => (
             <div className="bg-white p-6 rounded-sm shadow-md border-t-2 border-luxury-gold relative">
-                <div className="absolute -top-3 -right-3 w-10 h-10 bg-luxury-navy text-luxury-gold flex items-center justify-center rounded-full shadow-lg font-serif font-bold">
-                    {initial}
-                </div>
-                <div className="flex text-luxury-gold text-xs mb-3">
-                    {[...Array(stars)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
+                {/* Header with Stars and User Info */}
+                <div className="flex justify-between items-end mb-3 border-b border-gray-100 pb-2">
+                    <div className="flex text-luxury-gold text-xs">
+                        {[...Array(stars)].map((_, i) => <i key={i} className="fas fa-star"></i>)}
+                    </div>
+                    <div className="text-xs text-gray-500 font-bold text-right leading-tight">
+                        <span className="block text-luxury-navy mb-0.5">{attribute}</span>
+                        <span>{name}</span>
+                    </div>
                 </div>
                 <h4 className="font-serif font-bold text-base mb-3 text-luxury-navy leading-snug">{title}</h4>
                 <p className="text-sm text-gray-600 leading-7 text-justify font-sans">
@@ -187,18 +210,18 @@
 
         const Voices = () => {
             const data = [
-                { i: "N", t: "「今までの整骨院とは違う」", c: "首の凝りと腰痛で悩んでいましたが、確実に良くなっているのを実感。継続したいと思える施術です。" },
-                { i: "S", t: "生活習慣のアドバイスも的確", c: "長年悩んでいた腰痛が良くなってきました。施術だけでなくアドバイスも的確。信頼できる先生に出会えました。" },
-                { i: "M", t: "根本的に改善する治療法", c: "マッサージも気持ち良いのですが、根本改善治療でどんどん体調が良くなっています。引き続き通います。" },
-                { i: "S", t: "今までで1番自分に合った整骨院", c: "辛かった肩こりも一度で楽になり、体が軽くなりました。キッズスペースもあります！" },
-                { i: "N", t: "すっと姿勢が正された", c: "施術後は自分でも驚くほど姿勢が改善。コスパ、先生の人柄、有資格者の施術、全てにおいて満足です。" },
-                { i: "T", t: "一人ひとりに寄り添う姿勢", c: "本気で体を良くしたい方におすすめ。技術も素晴らしく、終わった後は本当に体が軽くなっていました。" },
-                { i: "K", t: "手技のみで30分しっかり", c: "表層筋・深層筋合わせてアプローチしてくれて、週2日メンテナンスで通っています。今どき貴重な整骨院です。" },
-                { i: "W", t: "最初の施術で腰痛が大幅改善", c: "母の腰痛と自分の不調で通院。先生の親身な対応と清潔な院内で安心して施術を受けられます。" },
-                { i: "S", t: "毎回赤ちゃん連れでも安心", c: "産後の腰痛で来院。施術中は先生やスタッフがお世話してくれて助かりました。説明もわかりやすい。" },
-                { i: "Y", t: "駅徒歩1分のアクセス", c: "ひどい肩こり・腰痛で来院。施術後は肩・首がスッと軽くなりました。無理な勧誘もなく自分のペースで通えます。" },
-                { i: "R", t: "的確な施術で身体が軽く", c: "腰の不調の原因を瞬時に見抜き、力加減も絶妙。対処法まで教えてくれる親切さに感謝です。" },
-                { i: "K", t: "相談しやすい優しい先生", c: "足腰の痛み、反り腰、巻き肩まで総合的に施術。駐車場代も負担してくれる心遣いが嬉しい。友人にもすすめます。" }
+                { name: "N.Yさん", attribute: "30代女性", t: "「今までの整骨院とは違う」", c: "首の凝りと腰痛で悩んでいましたが、確実に良くなっているのを実感。継続したいと思える施術です。" },
+                { name: "S.Mさん", attribute: "40代女性", t: "生活習慣のアドバイスも的確", c: "長年悩んでいた腰痛が良くなってきました。施術だけでなくアドバイスも的確。信頼できる先生に出会えました。" },
+                { name: "M.Kさん", attribute: "30代男性", t: "根本的に改善する治療法", c: "マッサージも気持ち良いのですが、根本改善治療でどんどん体調が良くなっています。引き続き通います。" },
+                { name: "S.Tさん", attribute: "30代女性", t: "今までで1番自分に合った整骨院", c: "辛かった肩こりも一度で楽になり、体が軽くなりました。キッズスペースもあります！" },
+                { name: "N.Hさん", attribute: "20代女性", t: "すっと姿勢が正された", c: "施術後は自分でも驚くほど姿勢が改善。コスパ、先生の人柄、有資格者の施術、全てにおいて満足です。" },
+                { name: "T.Iさん", attribute: "40代女性", t: "一人ひとりに寄り添う姿勢", c: "本気で体を良くしたい方におすすめ。技術も素晴らしく、終わった後は本当に体が軽くなっていました。" },
+                { name: "K.Oさん", attribute: "50代女性", t: "手技のみで30分しっかり", c: "表層筋・深層筋合わせてアプローチしてくれて、週2日メンテナンスで通っています。今どき貴重な整骨院です。" },
+                { name: "W.Aさん", attribute: "30代女性", t: "最初の施術で腰痛が大幅改善", c: "母の腰痛と自分の不調で通院。先生の親身な対応と清潔な院内で安心して施術を受けられます。" },
+                { name: "S.Sさん", attribute: "30代女性", t: "毎回赤ちゃん連れでも安心", c: "産後の腰痛で来院。施術中は先生やスタッフがお世話してくれて助かりました。説明もわかりやすい。" },
+                { name: "Y.Uさん", attribute: "40代男性", t: "駅徒歩1分のアクセス", c: "ひどい肩こり・腰痛で来院。施術後は肩・首がスッと軽くなりました。無理な勧誘もなく自分のペースで通えます。" },
+                { name: "R.Eさん", attribute: "40代女性", t: "的確な施術で身体が軽く", c: "腰の不調の原因を瞬時に見抜き、力加減も絶妙。対処法まで教えてくれる親切さに感謝です。" },
+                { name: "K.Nさん", attribute: "30代女性", t: "相談しやすい優しい先生", c: "足腰の痛み、反り腰、巻き肩まで総合的に施術。駐車場代も負担してくれる心遣いが嬉しい。友人にもすすめます。" }
             ];
 
             return (
@@ -213,7 +236,7 @@
                         </div>
                         <div className="grid grid-cols-1 gap-6">
                             {data.map((d, idx) => (
-                                <VoiceCard key={idx} initial={d.i} title={d.t} content={d.c} />
+                                <VoiceCard key={idx} name={d.name} attribute={d.attribute} title={d.t} content={d.c} />
                             ))}
                         </div>
                     </div>
@@ -286,7 +309,7 @@
                             </p>
                         </div>
 
-                        <a href="https://lin.ee/uqCRkRL" className="block w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-lg py-5 rounded shadow-[0_0_20px_rgba(6,199,85,0.4)] transform active:scale-95 transition-all hover:brightness-110 shine-effect">
+                        <a href="https://lin.ee/uqCRkRL" onClick={() => window.fbq('track', 'Lead')} className="block w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-lg py-5 rounded shadow-[0_0_20px_rgba(6,199,85,0.4)] transform active:scale-95 transition-all hover:brightness-110 shine-effect">
                             <div className="flex items-center justify-center gap-3">
                                 <i className="fab fa-line text-3xl"></i>
                                 <div className="text-left leading-none">
@@ -316,7 +339,7 @@
 
         const StickyCTA = () => (
             <div className="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur border-t border-gray-200 p-3 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] z-50 flex justify-center">
-                <a href="https://lin.ee/uqCRkRL" className="block w-full max-w-md bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-lg py-3 rounded shadow-lg text-center shine-effect transition-transform active:scale-95">
+                <a href="https://lin.ee/uqCRkRL" onClick={() => window.fbq('track', 'Lead')} className="block w-full max-w-md bg-gradient-to-r from-green-500 to-green-600 text-white font-bold text-lg py-3 rounded shadow-lg text-center shine-effect transition-transform active:scale-95">
                     <span className="flex items-center justify-center gap-2">
                         <i className="fab fa-line text-xl"></i>
                         <span className="drop-shadow-sm text-lg">簡単30秒で予約</span>
